@@ -1,58 +1,41 @@
-<?php  
-        if(isset($_GET['Valor'])){
-            include 'Conversor.php';
-            $resultado = new Conversor($_GET['valor'], $_GET['medidaDe'], $_GET['medidaPara']);
-            define('resultado', $resultado->getResultado());
-            
-        }else{
-            define('valor',0);
-            define('resultado',0);
-        }
-        ?>
-
-
+<?php 
+    include "php/Converter.php";
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conversor - Unidades</title>
+    <title>Conversor de medidas</title>
+    <link rel="stylesheet" href="css/style.css">
+   
 </head>
-<body>
+</head>
+<body >
+    <div>
 
-    <h3>Conversor de Unidades</h3>
+    
+    <h1 >Conversor de Unidades</h1>
+    <form method="get" >
+            <label for="numQuantidade">Digite a quantidade da medida: </label>
+            <input value="<?=$conversor->getNumero()?>"type="number" id="numQuantidade" name="numQuantidade" required>
+            <label for="selectDe">De:</label>
+            <select name="selectDe" id="selectDe" required> <?=$conversor->getopcoesDe()?>
+            </select>
 
-    <form action="Conversor.php" method="get">
-        <label for="valor">Digite a Quantidade</label>
-        <input type="number" name="valor" id="valor">
+            <label for="selectPara">Para:</label>
+            <select 
+            name="selectPara" id="selectPara" required><?=$conversor->getopcoesPara()?>
+            </select>
 
-        <select name="medidaDe" id="medidaDe">
-            <option value="1">Metro(s)</option>
-            <option value="1">Quilômetro(s)</option>
-            <option value="1">Centimetro(s)</option>  
-            <option value="1">Milímetro(s)</option>  
-
-        </select>
-
-        
-        <select name="medidaPara" id="medidaPara">
-            <option value="1">Metro(s)</option>
-            <option value="1000">Quilômetro(s)</option>
-            <option value="100">Centimetro(s)</option>  
-            <option value="1000">Milímetro(s)</option>  
-
-        </select>
-
-
-
+        <button  type="submit">Converter</button>
     </form>
-    
-    <button type="submit" >Converter</button>
-
-<label for="resultado"> Resultado: </label>
-<input type="number" id="resultado" name="resultado" value="<?=resultado?>" readonly>
-
-    
+    <div >
+        <label for="numResultado">Resultado:</label>
+        <input  
+        type="text" id="numResultado" name="numResultado" value="<?=$conversor->getResultado()?>"readonly>
+        
+    </div>
+    </div>
 </body>
 </html>
